@@ -1,0 +1,21 @@
+# 在注册中心显示的服务名称
+spring:
+  application:
+    name: user
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+      label: master
+    bus:
+      id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+# 指定注册中心的地址 将服务注册到注册中心上
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
