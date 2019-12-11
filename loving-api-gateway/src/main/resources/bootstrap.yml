@@ -1,0 +1,38 @@
+# 在注册中心显示的服务名称
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      discovery:
+        service-id: CONFIG
+        enabled: true
+      profile: dev
+      label: master
+    bus:
+      id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+# 指定注册中心的地址 将服务注册到注册中心上
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+
+ribbon:
+  MaxAutoRetries: 1 # 对当前的配置实例最大重试次数
+  MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+  ReadTimeout: 5000 # 请求处理超时的时间
+  ConnectTimeout: 3000 # 请求连接接的超时的时间
+  OkToRetryOnAllOperations: true # 对所有的请求都进行重试
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 330000 # > (10000+3000) * (1+1) * (1+1)
+zuul:
+  retryable: true # 开启路由重试
