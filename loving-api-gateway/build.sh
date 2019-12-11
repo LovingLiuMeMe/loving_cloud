@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-echo "============编译打包eureka-server==================="
+echo "============编译打包 api-gateway==================="
 mvn clean package -Dmaven.test.skip=true -U
 
-echo "============停止容器 eureka-server==================="
-docker stop eureka-server
+echo "============停止容器 api-gateway==================="
+docker stop api-gateway
 
-echo "============删除容器 eureka-server==================="
-docker rm eureka-server
+echo "============删除容器 api-gateway==================="
+docker rm api-gateway
 
-echo "============删除镜像 eureka-server==================="
-docker rmi eureka-server
+echo "============删除镜像 api-gateway==================="
+docker rmi api-gateway
 
-echo "============构建镜像 eureka-server==================="
-docker build -t eureka-server .
+echo "============构建镜像 api-gateway==================="
+docker build -t api-gateway .
 
-echo "============启动镜像 eureka-server 端口:1000==================="
-docker run --restart=always -p 1000:1000 -t --name eureka-server -d eureka-server
+echo "============启动镜像 api-gateway 端口:8000==================="
+docker run --restart=always -p 8000:8000 -t --name api-gateway -d api-gateway

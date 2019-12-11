@@ -2,8 +2,8 @@ FROM hub.c.163.com/library/java:8-alpine
 
 MAINTAINER lovingliu
 
-ADD target/*.jar eureka.jar
+ADD target/*.jar api-gateway.jar
 
-EXPOSE 1000
+EXPOSE 8000
 
-ENTRYPOINT ["java", "-jar", "/eureka.jar"]
+ENTRYPOINT ["java", "-jar", "/api-gateway.jar"]
