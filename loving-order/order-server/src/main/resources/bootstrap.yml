@@ -1,0 +1,55 @@
+# 在注册中心显示的服务名称
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      discovery:
+        service-id: CONFIG
+        enabled: true
+      profile: dev
+    bus:
+      id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+  zipkin:
+    #base-url:当你设置sleuth-cli收集信息后通过http传输到zinkin-server时，需要在这里配置
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+  # slueth 将收集到的信息发送到zipkin
+  sleuth:
+    sampler:
+      #收集追踪信息的比率，如果是0.1则表示只记录10%的追踪数据，如果要全部追踪，设置为1（实际场景不推荐，因为会造成不小的性能消耗）
+      probability: 1
+# 设置网关的相关配置
+#是否开启路由重试
+zuul:
+  retryable: true
+#对当前实例的重试次数
+ribbon:
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  ReadTimeout: 5000
+  ConnectTimeout: 2000
+  OkToRetryOnAllOperations: true
+# 设置触发熔断的超时时间(默认)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thred:
+            timeoutInMilliseconds: 30000
+
+# 指定注册中心的地址 将服务注册到注册中心上
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+
+# 更改日志级别 方便链路监控
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
