@@ -3,7 +3,7 @@ eureka:
     fetch-registry: false # 该应用为注册中心 只用维护服务实例,无需检索服务
     register-with-eureka: false # eureka 即是服务端又是服务端,且该应用是一个注册中心,所以取消向注册中心注册自己
     service-url: # 地址
-      defaultZone: http://127.0.0.1:1000/eureka/
+      defaultZone: http://49.235.110.134:1000/eureka/
   server: #自我保护模式关闭 在注册中心会一直提示
     enable-self-preservation: false
   instance: #使用主机的IP地址来定义注册中心的地址
