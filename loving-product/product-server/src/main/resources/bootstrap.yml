@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: product
+  cloud:
+    config:
+      discovery:
+        service-id: CONFIG
+        enabled: true
+      profile: dev
+      label: master
+    bus:
+      id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+# 更改日志级别 方便链路监控
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
+
+# 未放在统一配置中心
+ftp:
+  image:
+    prefix: http://img.lovingliu.cn/
