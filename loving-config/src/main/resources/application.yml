@@ -1,5 +1,9 @@
 server:
   port: 9000
+# docker 部署宿主主机地址
+project:
+  real-address: 49.235.110.134
+
 spring:
   application:
     name: config
@@ -28,7 +32,8 @@ eureka:
     service-url:
       defaultZone: http://49.235.110.134:1000/eureka
   instance:
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    # instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    instance-id: ${spring.application.name}:${project.real-address}:${server.port}
     prefer-ip-address: true
 management:
   # 暴露bus-refresh
