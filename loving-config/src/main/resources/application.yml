@@ -1,7 +1,7 @@
 server:
   port: 9000
 # docker 部署宿主主机地址
-projrct:
+project:
   real-address: 49.235.110.134
 
 spring:
