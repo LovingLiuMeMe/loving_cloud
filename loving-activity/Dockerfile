@@ -2,8 +2,8 @@ FROM hub.c.163.com/library/java:8-alpine
 
 MAINTAINER lovingliu
 
-ADD target/*.jar auth.jar
+ADD target/*.jar activity.jar
 
 EXPOSE 8000
 
-ENTRYPOINT ["java", "-jar", "/auth.jar"]
+ENTRYPOINT ["java", "-jar", "/activity.jar"]
