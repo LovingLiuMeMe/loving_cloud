@@ -3,4 +3,4 @@ mvn clean package -Dmaven.test.skip=true
 echo "============进入target目录==================="
 cd target
 echo "============运行jar包==================="
-nohup java -jar loving-0.0.1-SNAPSHOT.jar > log.file 2>&1 &
+nohup java -jar loving-api-gateway-0.0.1-SNAPSHOT.jar > log.file 2>&1 &
